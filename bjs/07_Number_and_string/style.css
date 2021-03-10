@@ -1,3 +1,7 @@
+.card-body{
+background-color: rgb(0, 38, 255);
+}
+
 .calc-row {
     height: 100vh;
     font-family: 'Share Tech Mono', monospace;
