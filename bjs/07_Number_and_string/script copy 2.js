@@ -32,23 +32,15 @@ function Oper (o, s){
             
         a = lastOperand;
         b = s;
-        inputWindowHistory.value = `${a} ${b}`;
+        inputWindowHistory.value = `${a} ${b} ${c}`;
         }else{
             if(inputWindow.value == ""){
                 b = s;
-                inputWindowHistory.value = `${a} ${b}`;
+                inputWindowHistory.value = `${a} ${b} ${c}`;
             }else{
-                if(equal == true){
-                    a = lastOperand
-                    b = s;
-                    inputWindowHistory.value = `${a} ${b}`;
-
-                }
-                else{
                 a = eval(`${inputWindowHistory.value} ${lastOperand}`)
                 b = s;
-                inputWindowHistory.value = `${a} ${b}`;
-                }
+        inputWindowHistory.value = `${a} ${b} ${c}`;
                 
             }
             
@@ -64,10 +56,9 @@ function Oper (o, s){
 
     document.getElementById('btn_plus').addEventListener('click', function(){
          
-        
+        console.log(operation);
         Oper('sum', '+' );
         res = res + lastOperand;
-        console.log(operation);
         
         
     });
@@ -75,21 +66,17 @@ function Oper (o, s){
     document.getElementById('btn_minus').addEventListener('click', function () {
         Oper('minus', '-' );
         res = lastOperand - res;
-        console.log(operation);
-        console.log(res);
         
     });
     document.getElementById('btn_multiplication').addEventListener('click', function () {
         Oper('multiplication', '*' );
         res = res * lastOperand;
-        console.log(operation);
         
     });
     document.getElementById('btn_division').addEventListener('click', function () {
         Oper('division', '/' );
        
         res += lastOperand;
-        console.log(operation);
         
     });
 
@@ -106,7 +93,7 @@ document.getElementById('btn_squrt').addEventListener('click', function () {
 
 document.getElementById('btn_equal').addEventListener('click', function () {
     if (operation == 'sum') {
-        res  = eval(`${inputWindowHistory.value} ${inputWindow.value}`); 
+        res =  res  +  parseInt(inputWindow.value); 
         if(inputWindowHistory.value == ""){
             inputWindowHistory.value = `${inputWindow.value} `;
             }else{
@@ -119,8 +106,7 @@ document.getElementById('btn_equal').addEventListener('click', function () {
     }
 
     if (operation == 'minus'){
-    res  = eval(`${inputWindowHistory.value} ${inputWindow.value}`); 
-    
+    const result =  res  - parseInt(inputWindow.value); 
     if(inputWindowHistory.value == ""){
         inputWindowHistory.value = `${inputWindow.value} `;
         }else{
@@ -132,7 +118,7 @@ document.getElementById('btn_equal').addEventListener('click', function () {
         equal = true;
     }
     if (operation == 'multiplication'){
-        res  = eval(`${inputWindowHistory.value} ${inputWindow.value}`); 
+    const result =  res  * parseInt(inputWindow.value); 
     if(inputWindowHistory.value == ""){
         inputWindowHistory.value = `${inputWindow.value} `;
         }else{
@@ -144,7 +130,8 @@ document.getElementById('btn_equal').addEventListener('click', function () {
         equal = true;
     }
     if (operation == 'division'){
-        res  = eval(`${inputWindowHistory.value} ${inputWindow.value}`); 
+        console.log(`${res} ${inputWindow.value}` );
+    res =  res  / parseInt(inputWindow.value);
     console.log(`${res} ${inputWindow.value}` );
     if(inputWindowHistory.value == ""){
         inputWindowHistory.value = `${inputWindow.value} `;

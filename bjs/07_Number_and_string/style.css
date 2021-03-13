@@ -10,4 +10,7 @@ background-color: rgb(0, 38, 255);
 .input-window {
     text-align: end;
     font-size: x-large;
+    padding: 0;
+    border: none;
+    margin: 0;
 }
