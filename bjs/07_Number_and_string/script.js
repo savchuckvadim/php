@@ -5,6 +5,7 @@ let res = 0;
 let a = "";
 let b = "";
 let c = "";
+let sq = "";
 
 const inputWindow = document.getElementById('inputWindow');
 const inputWindowHistory = document.getElementById('inputWindow-history');
@@ -20,87 +21,113 @@ document.getElementById('btn_clr').addEventListener('click', function () {
     
     
 })
+   
+function squ (){  
+    lastOperand = parseInt(inputWindow.value);  
+    sq = "√"; 
+    a = lastOperand; 
+    
+    
+    if(inputWindowHistory.value == ""){      /*если история пуста*/   
+                                           
+       const result = Math.sqrt(Math.abs(lastOperand));   
+       
+        inputWindowHistory.value = `${sq} ${a}`; 
+        inputWindow.value = result;  
+        }else{ 
+            if (operation == null){       
+                                                                              /*если история есть*/   
+      
+        console.log(operation); 
 
+        inputWindowHistory.value = `${sq} ${inputWindow.value}`;  
+        const result = Math.sqrt(Math.abs(a));   
+        inputWindow.value =  result; 
+   
+     console.log('оперэйшн пуст'); }   
+           
+    else{   
+        console.log('оперэйшн cум'); 
+           
+        console.log(a); 
 
-function Oper (o, s){
-     
+        a = eval(`${inputWindowHistory.value}  ${inputWindow.value}`); 
+        console.log(a); 
+         const result = Math.sqrt(Math.abs(a)); 
+         console.log(result);  
+        inputWindowHistory.value = `${sq} ${a}`;
+         
+        inputWindow.value =  result;   
+    }   
+ }
+}
+
+function Oper (o, s){    
+    
     lastOperand = parseInt(inputWindow.value);
-        operation = o;
-        
+        operation = o;       
 
-        if(inputWindowHistory.value == ""){
-            
+        if(inputWindowHistory.value == ""){                                           /*если история пуста*/            
         a = lastOperand;
         b = s;
         inputWindowHistory.value = `${a} ${b}`;
-        }else{
-            if(inputWindow.value == ""){
+        }else{                                                                      /*если история есть*/
+            if(inputWindow.value == ""){                                           /*если поле ввода пусто*/
                 b = s;
                 inputWindowHistory.value = `${a} ${b}`;
-            }else{
-                if(equal == true){
+            }else{                                                                    /*если поле ввода Есть*/
+                                                            
+                if(equal == true){                                                  /*если знак Равно был нажат*/
+                    
                     a = lastOperand
                     b = s;
                     inputWindowHistory.value = `${a} ${b}`;
+                    if(sq == "√"){ squ ()}                                     
+                    
 
                 }
-                else{
-                a = eval(`${inputWindowHistory.value} ${lastOperand}`)
-                b = s;
-                inputWindowHistory.value = `${a} ${b}`;
-                }
-                
-            }
-            
-        }
-       /* res =  res  +  parseInt(inputWindow.value); 
-        console.log(lastOperand);
-        console.log(res);*/
+                else{                                                                /*если знак Равно НЕ был нажат*/
+                    b = s;   
+                    if(sq == "√"){                                                    /*если Корень НЕ был нажат*/
+                        inputWindowHistory.value = `${inputWindow.value} ${b}`
+                    }                                                     
+                     else{
+                    console.log(operation);                                           
+                    a = eval(`${inputWindowHistory.value} ${lastOperand}`)
+                    
+                    inputWindowHistory.value = `${a} ${b}`;
+                     }
+                    
+                    
+                    
+                }                
+            }            
+        }      
         inputWindow.value = '';
-    
+        equal = false;    
     }
 
 
 
-    document.getElementById('btn_plus').addEventListener('click', function(){
-         
-        
-        Oper('sum', '+' );
-        res = res + lastOperand;
-        console.log(operation);
-        
-        
+    document.getElementById('btn_plus').addEventListener('click', function(){       
+        Oper('sum', '+' );        
     });
 
     document.getElementById('btn_minus').addEventListener('click', function () {
-        Oper('minus', '-' );
-        res = lastOperand - res;
-        console.log(operation);
-        console.log(res);
-        
+        Oper('minus', '-' );    
     });
     document.getElementById('btn_multiplication').addEventListener('click', function () {
-        Oper('multiplication', '*' );
-        res = res * lastOperand;
-        console.log(operation);
-        
+        Oper('multiplication', '*' );   
     });
     document.getElementById('btn_division').addEventListener('click', function () {
-        Oper('division', '/' );
-       
-        res += lastOperand;
-        console.log(operation);
-        
+        Oper('division', '/' );   
     });
 
 
 
 document.getElementById('btn_squrt').addEventListener('click', function () {
-    lastOperand = parseInt(inputWindow.value);
-    const result = Math.sqrt(Math.abs(lastOperand))
-    inputWindowHistory.value = `√ ${lastOperand} `
-    inputWindow.value = result;
-    lastOperand = 0;
+    squ(); 
+    
 
 })
 
@@ -145,7 +172,7 @@ document.getElementById('btn_equal').addEventListener('click', function () {
     }
     if (operation == 'division'){
         res  = eval(`${inputWindowHistory.value} ${inputWindow.value}`); 
-    console.log(`${res} ${inputWindow.value}` );
+    
     if(inputWindowHistory.value == ""){
         inputWindowHistory.value = `${inputWindow.value} `;
         }else{
@@ -156,31 +183,27 @@ document.getElementById('btn_equal').addEventListener('click', function () {
         inputWindow.value = res;
         equal = true;
         res = 0;
-    }
-    
+    }    
 })
+
 function btnNumb (a){
+    console.log(equal);
     if(inputWindow.value == 0 || equal == true) {
-        inputWindow.value = a;
-        
-        
-        
+        inputWindow.value = a;    
     }
     else inputWindow.value += a;
     if (equal == true){
         inputWindowHistory.value = "";
         equal = false;
-    }
-    
+    }  
 }
+
 document.getElementById('btn_1').addEventListener('click', function () {
-    btnNumb (1);
-    
+    btnNumb (1);   
 })
 
 document.getElementById('btn_2').addEventListener('click', function () {
-    btnNumb (2);
-    
+    btnNumb (2);   
 })
 
 document.getElementById('btn_3').addEventListener('click', function () {
@@ -213,5 +236,5 @@ document.getElementById('btn_9').addEventListener('click', function () {
 
 document.getElementById('btn_0').addEventListener('click', function () {
     btnNumb (0);
-})
+});
 
