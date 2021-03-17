@@ -6,7 +6,10 @@ let a = "";
 let b = "";
 let c = "";
 let sq = "";
+let pointOnOff = false;
 
+
+const point = document.getElementById('point');
 const inputWindow = document.getElementById('inputWindow');
 const inputWindowHistory = document.getElementById('inputWindow-history');
 
@@ -18,12 +21,33 @@ document.getElementById('btn_clr').addEventListener('click', function () {
     inputWindowHistory.value = "";
     equal = false;
     res = 0;
+    pointOnOff = false;
     
     
 })
+/* в разработке */
+point.addEventListener('click', function() {
+    console.log('point');
+    if(equal == true){
+        inputWindow.value = `0.`
+        equal = false;
+    }else{
+    if(pointOnOff == false){
+        if(inputWindow.value == 0){
+            inputWindow.value = `0.`;
+        }
+        else inputWindow.value = `${inputWindow.value}.`;
+    }
+ }
+    pointOnOff = true;
+
+       
+    
+})
+
    
 function squ (){  
-    lastOperand = parseInt(inputWindow.value);  
+    lastOperand = parseFloat(inputWindow.value);  
     sq = "√"; 
     a = lastOperand; 
     
@@ -44,17 +68,17 @@ function squ (){
         const result = Math.sqrt(Math.abs(a));   
         inputWindow.value =  result; 
    
-     console.log('оперэйшн пуст'); }   
+      }   
            
     else{   
-        console.log('оперэйшн cум'); 
+       
            
-        console.log(a); 
+        
 
         a = eval(`${inputWindowHistory.value}  ${inputWindow.value}`); 
-        console.log(a); 
+        
          const result = Math.sqrt(Math.abs(a)); 
-         console.log(result);  
+          
         inputWindowHistory.value = `${sq} ${a}`;
          
         inputWindow.value =  result;   
@@ -64,7 +88,7 @@ function squ (){
 
 function Oper (o, s){    
     
-    lastOperand = parseInt(inputWindow.value);
+    lastOperand = parseFloat(inputWindow.value);
         operation = o;       
 
         if(inputWindowHistory.value == ""){                                           /*если история пуста*/            
@@ -104,7 +128,8 @@ function Oper (o, s){
             }            
         }      
         inputWindow.value = '';
-        equal = false;    
+        equal = false;  
+        pointOnOff = false;  
     }
 
 
@@ -183,18 +208,24 @@ document.getElementById('btn_equal').addEventListener('click', function () {
         inputWindow.value = res;
         equal = true;
         res = 0;
-    }    
+    }   
+    pointOnOff = false;   
 })
 
 function btnNumb (a){
-    console.log(equal);
+   
     if(inputWindow.value == 0 || equal == true) {
-        inputWindow.value = a;    
+        if(pointOnOff == true){
+
+            inputWindow.value += a;
+        }
+        else inputWindow.value = a;    
     }
     else inputWindow.value += a;
     if (equal == true){
         inputWindowHistory.value = "";
         equal = false;
+        
     }  
 }
 
