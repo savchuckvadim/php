@@ -26,7 +26,7 @@ document.getElementById('btn_clr').addEventListener('click', function () {
     
 })
 /* в разработке */
-/*eval 124 - ощибка*/
+
 point.addEventListener('click', function() {
     console.log('point');
     if(equal == true){
