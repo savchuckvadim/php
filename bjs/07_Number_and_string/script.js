@@ -87,9 +87,13 @@ function squ (){
  }
 }
 
-function Oper (o, s){    
+function Oper (o, s){  
+    if(inputWindow.value == "" ){ 
+        inputWindow.value = 0;
+    }else{
+
     
-    lastOperand = parseFloat(inputWindow.value);
+        lastOperand = parseFloat(inputWindow.value);
         operation = o;       
 
         if(inputWindowHistory.value == ""){                                           /*если история пуста*/            
@@ -117,11 +121,18 @@ function Oper (o, s){
                         inputWindowHistory.value = `${inputWindow.value} ${b}`
                     }                                                     
                      else{
-                    console.log(operation);                                           
-                    a = eval(`${inputWindowHistory.value} ${lastOperand}`)
+                    
+                    if(pointOnOff == true){
+                        a = lastOperand;
+                    } else{
+                        a = eval(`${inputWindowHistory.value}${lastOperand}`);
+
+                    }                                     
+                   
+                   
                     
                     inputWindowHistory.value = `${a} ${b}`;
-                     }
+                    }
                     
                     
                     
@@ -132,6 +143,7 @@ function Oper (o, s){
         equal = false;  
         pointOnOff = false;  
     }
+}
 
 
 
